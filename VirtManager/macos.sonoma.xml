@@ -27,9 +27,20 @@
   <devices>
     <emulator>/usr/bin/qemu-system-x86_64</emulator>
     <disk type="file" device="disk">
+    <driver name="qemu" type="qcow2"/>
+    <source file="/var/lib/virtual-machines/OSX-KVM/OpenCore/OpenCore.qcow2"/>
+    <target dev="sda" bus="sata"/>
+    </disk>
+    <disk type="file" device="disk">
       <driver name="qemu" type="qcow2"/>
       <source file="/var/lib/virtual-machines/OSX-KVM/mac_hdd_ng.img"/>
       <target dev="hda" bus="ide"/>
+    </disk>
+    <disk type="file" device="cdrom">
+    <driver name="qemu" type="raw"/>
+    <source file="/var/lib/virtual-machines/OSX-KVM/BaseSystem.img"/>
+    <target dev="sdb" bus="sata"/>
+    <readonly/>
     </disk>
     <controller type="usb" model="ich9-ehci1"/>
     <controller type="usb" model="ich9-uhci1"/>
