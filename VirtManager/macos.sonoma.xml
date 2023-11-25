@@ -50,27 +50,27 @@
   <on_crash>destroy</on_crash>
   <devices>
     <emulator>/usr/bin/qemu-system-x86_64</emulator>
-    <disk type="file" device="disk">
-      <driver name="qemu" type="qcow2" />
-      <source file="/var/lib/virtual-machines/OSX-KVM/OpenCore/OpenCore.qcow2" />
-      <target dev="sda" bus="sata" />
-      <address type="drive" controller="0" bus="0" target="0" unit="0" />
+    <disk type='file' device='disk'>
+      <driver name='qemu' type='qcow2' cache='writeback' io='threads' />
+      <source file='/var/lib/virtual-machines/OSX-KVM/OpenCore/OpenCore.qcow2' />
+      <target dev='sda' bus='sata' />
+      <boot order='2' />
+      <address type='drive' controller='0' bus='0' target='0' unit='0' />
     </disk>
-    <disk type="file" device="cdrom">
-      <driver name="qemu" type="raw" />
+    <disk type='file' device='disk'>
+      <driver name='qemu' type='qcow2' cache='writeback' io='threads' />
+      <source file='/var/lib/virtual-machines/OSX-KVM/mac_hdd_ng.img' />
+      <target dev='sdb' bus='sata' />
+      <boot order='3' />
+      <address type='drive' controller='0' bus='0' target='0' unit='1' />
+    </disk>
+    <disk type="file" device="disk">
+      <driver name="qemu" type="raw" cache="writeback" />
       <source file="/var/lib/virtual-machines/OSX-KVM/BaseSystem.img" />
-      <target dev="sdb" bus="sata" />
-      <readonly />
+      <target dev="sdc" bus="sata" />
       <boot order="1" />
       <address type="drive" controller="0" bus="0" target="0" unit="2" />
     </disk>
-    <disk type="file" device="disk">
-      <driver name="qemu" type="qcow2" />
-      <source file="/var/lib/virtual-machines/OSX-KVM/mac_hdd_ng.img" />
-      <target dev="sdc" bus="sata" />
-      <address type="drive" controller="0" bus="0" target="0" unit="1" />
-    </disk>
-
     <interface type="network">
       <mac address="52:54:00:26:44:6b" />
       <source network="default" />
@@ -116,8 +116,26 @@
     </memballoon>
   </devices>
   <qemu:commandline>
-    <qemu:arg value="-device" />
+    <qemu:arg value='-device' />
     <qemu:arg
-      value="isa-applesmc,osk=&quot;ourhardworkbythesewordsguardedpleasedontsteal(c)AppleComputerInc&quot;" />
+      value='isa-applesmc,osk=ourhardworkbythesewordsguardedpleasedontsteal(c)AppleComputerInc' />
+    <qemu:arg value='-smbios' />
+    <qemu:arg value='type=2' />
+    <qemu:arg value='-usb' />
+    <qemu:arg value='-device' />
+    <qemu:arg value='usb-tablet' />
+    <qemu:arg value='-device' />
+    <qemu:arg value='usb-kbd' />
+    <qemu:arg value='-cpu' />
+    <qemu:arg
+      value='Penryn,kvm=on,vendor=GenuineIntel,+invtsc,vmware-cpuid-freq=on,+ssse3,+sse4.2,+popcnt,+avx,+aes,+xsave,+xsaveopt,check' />
+    <!-- <qemu:arg
+    value='Penryn,vendor=GenuineIntel,+hypervisor,+invtsc,kvm=on,+fma,+avx,+avx2,+aes,+ssse3,+sse4_2,+popcnt,+sse4a,+bmi1,+bmi2'/> -->
+    <!-- If you wanna use cpu host-passthrough mode, uncomments below-->
+    <!-- <qemu:arg
+    value='host,vendor=GenuineIntel,+hypervisor,+invtsc,kvm=on,+fma,+avx,+avx2,+aes,+ssse3,+sse4_2,+popcnt,+sse4a,+bmi1,+bmi2'/> -->
+    <!-- If you wanna use cpu emulating mode like Skylake-Server, uncomments below-->
+    <!-- <qemu:arg
+    value='Skylake-Server,vendor=GenuineIntel,+hypervisor,+invtsc,kvm=on,+fma,+avx,+avx2,+aes,+ssse3,+sse4_2,+popcnt,+sse4a,+bmi1,+bmi2'/> -->
   </qemu:commandline>
 </domain>
