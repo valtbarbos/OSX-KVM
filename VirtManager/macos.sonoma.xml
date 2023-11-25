@@ -50,47 +50,78 @@
   <on_crash>destroy</on_crash>
   <devices>
     <emulator>/usr/bin/qemu-system-x86_64</emulator>
-    <disk type='file' device='disk'>
-      <driver name='qemu' type='qcow2' cache='writeback' io='threads' />
-      <source file='/var/lib/virtual-machines/OSX-KVM/OpenCore/OpenCore.qcow2' />
-      <target dev='sda' bus='sata' />
-      <boot order='2' />
-      <address type='drive' controller='0' bus='0' target='0' unit='0' />
+    <disk type="file" device="disk">
+      <driver name="qemu" type="qcow2" cache="writeback" io="threads" />
+      <source file="/var/lib/virtual-machines/OSX-KVM/OpenCore/OpenCore.qcow2" />
+      <target dev="sda" bus="sata" />
+      <boot order="2" />
+      <address type="drive" controller="0" bus="0" target="0" unit="0" />
     </disk>
-    <disk type='file' device='disk'>
-      <driver name='qemu' type='qcow2' cache='writeback' io='threads' />
-      <source file='/var/lib/virtual-machines/OSX-KVM/mac_hdd_ng.img' />
-      <target dev='sdb' bus='sata' />
-      <boot order='3' />
-      <address type='drive' controller='0' bus='0' target='0' unit='1' />
+    <disk type="file" device="disk">
+      <driver name="qemu" type="qcow2" cache="writeback" io="threads" />
+      <source file="/var/lib/virtual-machines/OSX-KVM/mac_hdd_ng.img" />
+      <target dev="sdb" bus="sata" />
+      <boot order="1" />
+      <address type="drive" controller="0" bus="0" target="0" unit="1" />
     </disk>
     <disk type="file" device="disk">
       <driver name="qemu" type="raw" cache="writeback" />
       <source file="/var/lib/virtual-machines/OSX-KVM/BaseSystem.img" />
       <target dev="sdc" bus="sata" />
-      <boot order="1" />
+      <boot order="3" />
       <address type="drive" controller="0" bus="0" target="0" unit="2" />
     </disk>
+    <controller type="usb" index="0" model="qemu-xhci" ports="15">
+      <address type="pci" domain="0x0000" bus="0x00" slot="0x0d" function="0x0" />
+    </controller>
+    <controller type="sata" index="0">
+      <address type="pci" domain="0x0000" bus="0x00" slot="0x1f" function="0x2" />
+    </controller>
+    <controller type="pci" index="0" model="pcie-root" />
+    <controller type="pci" index="1" model="pcie-root-port">
+      <model name="pcie-root-port" />
+      <target chassis="1" port="0x8" />
+      <address type="pci" domain="0x0000" bus="0x00" slot="0x01" function="0x0" multifunction="on" />
+    </controller>
+    <controller type="pci" index="2" model="pcie-to-pci-bridge">
+      <model name="pcie-pci-bridge" />
+      <address type="pci" domain="0x0000" bus="0x01" slot="0x00" function="0x0" />
+    </controller>
+    <controller type="pci" index="3" model="pcie-root-port">
+      <model name="pcie-root-port" />
+      <target chassis="3" port="0x9" />
+      <address type="pci" domain="0x0000" bus="0x00" slot="0x01" function="0x1" />
+    </controller>
+    <controller type="pci" index="4" model="pcie-root-port">
+      <model name="pcie-root-port" />
+      <target chassis="4" port="0xa" />
+      <address type="pci" domain="0x0000" bus="0x00" slot="0x01" function="0x2" />
+    </controller>
+    <controller type="pci" index="5" model="pcie-root-port">
+      <model name="pcie-root-port" />
+      <target chassis="5" port="0xb" />
+      <address type="pci" domain="0x0000" bus="0x00" slot="0x01" function="0x3" />
+    </controller>
+    <controller type="pci" index="6" model="pcie-root-port">
+      <model name="pcie-root-port" />
+      <target chassis="6" port="0xc" />
+      <address type="pci" domain="0x0000" bus="0x00" slot="0x01" function="0x4" />
+    </controller>
     <interface type="network">
       <mac address="52:54:00:26:44:6b" />
       <source network="default" />
       <model type="e1000" />
       <address type="pci" domain="0x0000" bus="0x02" slot="0x01" function="0x0" />
     </interface>
-    <serial type="pty">
-      <target type="isa-serial" port="0">
-        <model name="isa-serial" />
-      </target>
-    </serial>
-    <console type="pty">
-      <target type="serial" port="0" />
-    </console>
     <input type="evdev">
       <source dev="/dev/input/by-id/usb-Logitech_USB_Receiver-if02-event-mouse" />
     </input>
     <input type="evdev">
       <source dev="/dev/input/by-id/usb-Logitech_USB_Receiver-if01-event-kbd" grab="all"
         grabToggle="ctrl-ctrl" repeat="on" />
+    </input>
+    <input type="tablet" bus="usb">
+      <address type="usb" bus="0" port="1" />
     </input>
     <input type="mouse" bus="ps2" />
     <input type="keyboard" bus="ps2" />
@@ -116,26 +147,19 @@
     </memballoon>
   </devices>
   <qemu:commandline>
-    <qemu:arg value='-device' />
+    <qemu:arg value="-device" />
     <qemu:arg
-      value='isa-applesmc,osk=ourhardworkbythesewordsguardedpleasedontsteal(c)AppleComputerInc' />
-    <qemu:arg value='-smbios' />
-    <qemu:arg value='type=2' />
-    <qemu:arg value='-usb' />
-    <qemu:arg value='-device' />
-    <qemu:arg value='usb-tablet' />
-    <qemu:arg value='-device' />
-    <qemu:arg value='usb-kbd' />
-    <qemu:arg value='-cpu' />
+      value="isa-applesmc,osk=ourhardworkbythesewordsguardedpleasedontsteal(c)AppleComputerInc" />
+    <qemu:arg value="-smbios" />
+    <qemu:arg value="type=2" />
+    <qemu:arg value="-cpu" />
     <qemu:arg
-      value='Penryn,kvm=on,vendor=GenuineIntel,+invtsc,vmware-cpuid-freq=on,+ssse3,+sse4.2,+popcnt,+avx,+aes,+xsave,+xsaveopt,check' />
-    <!-- <qemu:arg
-    value='Penryn,vendor=GenuineIntel,+hypervisor,+invtsc,kvm=on,+fma,+avx,+avx2,+aes,+ssse3,+sse4_2,+popcnt,+sse4a,+bmi1,+bmi2'/> -->
-    <!-- If you wanna use cpu host-passthrough mode, uncomments below-->
-    <!-- <qemu:arg
-    value='host,vendor=GenuineIntel,+hypervisor,+invtsc,kvm=on,+fma,+avx,+avx2,+aes,+ssse3,+sse4_2,+popcnt,+sse4a,+bmi1,+bmi2'/> -->
-    <!-- If you wanna use cpu emulating mode like Skylake-Server, uncomments below-->
-    <!-- <qemu:arg
-    value='Skylake-Server,vendor=GenuineIntel,+hypervisor,+invtsc,kvm=on,+fma,+avx,+avx2,+aes,+ssse3,+sse4_2,+popcnt,+sse4a,+bmi1,+bmi2'/> -->
+      value="Penryn,kvm=on,vendor=GenuineIntel,+invtsc,vmware-cpuid-freq=on,+ssse3,+sse4.2,+popcnt,+avx,+aes,+xsave,+xsaveopt,check" />
+    <qemu:arg value="-machine" />
+    <qemu:arg value="q35" />
+    <qemu:arg value="-global" />
+    <qemu:arg value="ICH9-LPC.disable_s3=1" />
+    <qemu:arg value="-global" />
+    <qemu:arg value="ICH9-LPC.disable_s4=1" />
   </qemu:commandline>
 </domain>
