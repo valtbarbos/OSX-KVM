@@ -51,16 +51,19 @@
       <driver name="qemu" type="qcow2" />
       <source file="/var/lib/virtual-machines/OSX-KVM/OpenCore/OpenCore.qcow2" />
       <target dev="sda" bus="sata" />
+      <address type="drive" controller="0" bus="0" target="0" unit="0" />
     </disk>
     <disk type="file" device="disk">
       <driver name="qemu" type="qcow2" />
       <source file="/var/lib/virtual-machines/OSX-KVM/mac_hdd_ng.img" />
       <target dev="sdc" bus="sata" />
+      <address type="drive" controller="0" bus="0" target="0" unit="1" />
     </disk>
     <disk type="file" device="cdrom">
       <driver name="qemu" type="raw" />
       <source file="/var/lib/virtual-machines/OSX-KVM/BaseSystem.img" />
       <target dev="sdb" bus="sata" />
+      <address type="drive" controller="0" bus="0" target="0" unit="2" />
       <readonly />
     </disk>
     <input type='evdev'>
@@ -70,33 +73,28 @@
       <source dev='/dev/input/by-id/usb-Logitech_USB_Receiver-if01-event-kbd' grab='all' repeat='on'
         grabToggle='ctrl-ctrl' />
     </input>
-    <controller type="usb" model="ich9-ehci1" />
-    <controller type="usb" model="ich9-uhci1" />
-    <controller type="usb" model="ich9-uhci2" />
-    <controller type="usb" model="ich9-uhci3" />
     <interface type="network">
-      <source network="default" />
       <mac address="52:54:00:26:44:6b" />
+      <source network="default" />
       <model type="e1000" />
+      <address type="pci" domain="0x0000" bus="0x02" slot="0x01" function="0x0" />
     </interface>
     <console type="pty" />
-    <input type="tablet" bus="usb" />
-    <graphics type="vnc" port="-1" tlsPort="-1" autoport="yes">
-      <image compression="off" />
-    </graphics>
     <sound model="ich6" />
     <video>
       <model type="qxl" />
     </video>
     <hostdev mode="subsystem" type="pci" managed="yes">
       <source>
-        <address domain="0" bus="5" slot="0" function="0" />
+        <address domain="0x0000" bus="0x05" slot="0x00" function="0x0" />
       </source>
+      <address type="pci" domain="0x0000" bus="0x03" slot="0x00" function="0x0" />
     </hostdev>
     <hostdev mode="subsystem" type="pci" managed="yes">
       <source>
-        <address domain="0" bus="5" slot="0" function="1" />
+        <address domain="0x0000" bus="0x05" slot="0x00" function="0x1" />
       </source>
+      <address type="pci" domain="0x0000" bus="0x04" slot="0x00" function="0x0" />
     </hostdev>
   </devices>
   <qemu:commandline>
