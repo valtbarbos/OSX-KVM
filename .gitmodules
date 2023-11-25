@@ -4,3 +4,6 @@
 [submodule "OpenCorePkg"]
 	path = OpenCorePkg
 	url = https://github.com/acidanthera/OpenCorePkg.git
+[submodule "KVM-Opencore"]
+	path = KVM-Opencore
+	url = https://github.com/Leoyzen/KVM-Opencore.git
