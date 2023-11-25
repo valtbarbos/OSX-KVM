@@ -94,6 +94,16 @@
     <video>
       <model type="qxl" />
     </video>
+    <hostdev mode="subsystem" type="pci" managed="yes">
+      <source>
+        <address domain="0" bus="5" slot="0" function="0" />
+      </source>
+    </hostdev>
+    <hostdev mode="subsystem" type="pci" managed="yes">
+      <source>
+        <address domain="0" bus="5" slot="0" function="1" />
+      </source>
+    </hostdev>
   </devices>
   <qemu:commandline>
     <qemu:arg value="-device" />
