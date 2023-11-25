@@ -1,3 +1,6 @@
 [submodule "resources/OcBinaryData"]
 	path = resources/OcBinaryData
 	url = https://github.com/acidanthera/OcBinaryData.git
+[submodule "OpenCorePkg"]
+	path = OpenCorePkg
+	url = https://github.com/acidanthera/OpenCorePkg.git
