@@ -7,3 +7,6 @@
 [submodule "KVM-Opencore"]
 	path = KVM-Opencore
 	url = https://github.com/Leoyzen/KVM-Opencore.git
+[submodule "OSX-PROXMOX"]
+	path = OSX-PROXMOX
+	url = https://github.com/luchina-gabriel/OSX-PROXMOX.git

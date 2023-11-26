@@ -1,6 +1,6 @@
 <domain xmlns:qemu="http://libvirt.org/schemas/domain/qemu/1.0" type="kvm">
-  <name>MacOS.Sonoma</name>
-  <uuid>e248bf4a-15ba-4837-8d02-20f927ba8b59</uuid>
+  <name>MacOS.Ventura</name>
+  <uuid>7bc83f18-6cf5-45a4-8892-282d951b3fa0</uuid>
   <memory unit="KiB">67108864</memory>
   <currentMemory unit="KiB">67108864</currentMemory>
   <vcpu placement="static">8</vcpu>
