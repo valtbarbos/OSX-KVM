@@ -248,11 +248,11 @@
 			<key>Quirks</key>
 			<dict>
 				<key>FadtEnableReset</key>
-				<false />
+				<true />
 				<key>NormalizeHeaders</key>
 				<false />
 				<key>RebaseRegions</key>
-				<false />
+				<true />
 				<key>ResetHwSig</key>
 				<false />
 				<key>ResetLogoStatus</key>
@@ -304,7 +304,7 @@
 				<key>ResizeAppleGpuBars</key>
 				<integer>0</integer>
 				<key>SetupVirtualMap</key>
-				<false />
+				<true />
 				<key>SignalAppleOS</key>
 				<false />
 				<key>SyncRuntimePermissions</key>
@@ -1024,6 +1024,8 @@
 				<dict>
 					<key>DefaultBackgroundColor</key>
 					<data>AAAAAA==</data>
+					<key>UIScale</key>
+					<data>AQ==</data>
 				</dict>
 				<key>4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102</key>
 				<dict>
@@ -1032,17 +1034,13 @@
 				</dict>
 				<key>7C436110-AB2A-4BBB-A880-FE41995C9F82</key>
 				<dict>
-					<key>#INFO (prev-lang:kbd)</key>
-					<string>en:252 (ABC), set 656e3a323532</string>
-					<key>ForceDisplayRotationInEFI</key>
-					<integer>0</integer>
 					<key>SystemAudioVolume</key>
 					<data>Rg==</data>
 					<key>boot-args</key>
 					<string>-v agdpmod=pikera debug=0x100 npci=0x2000 npci=0x3000 keepsyms=1
 						amfi_get_out_of_my_way=1</string>
 					<key>csr-active-config</key>
-					<data>ZwAAAA==</data>
+					<data>/w8AAA==</data>
 					<key>prev-lang:kbd</key>
 					<data>ZW4tVVM6MA==</data>
 					<key>run-efi-updater</key>
@@ -1053,6 +1051,7 @@
 			<dict>
 				<key>4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14</key>
 				<array>
+					<string>UIScale</string>
 					<string>DefaultBackgroundColor</string>
 				</array>
 				<key>4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102</key>
@@ -1460,7 +1459,7 @@
 				<key>ClearScreenOnModeSwitch</key>
 				<false />
 				<key>ConsoleMode</key>
-				<string></string>
+				<string>Max</string>
 				<key>DirectGopRendering</key>
 				<false />
 				<key>ForceResolution</key>
@@ -1478,13 +1477,13 @@
 				<key>ReplaceTabWithSpace</key>
 				<false />
 				<key>Resolution</key>
-				<string>1920x1080@32</string>
+				<string>Max</string>
 				<key>SanitiseClearScreen</key>
 				<false />
 				<key>TextRenderer</key>
 				<string>BuiltinGraphics</string>
 				<key>UIScale</key>
-				<integer>0</integer>
+				<integer>-1</integer>
 				<key>UgaPassThrough</key>
 				<false />
 			</dict>
