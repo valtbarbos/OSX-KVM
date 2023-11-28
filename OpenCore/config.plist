@@ -150,14 +150,6 @@
 					<key>Path</key>
 					<string>SSDT-DTGP.aml</string>
 				</dict>
-				<dict>
-					<key>Comment</key>
-					<string>USB 2.0 Injection</string>
-					<key>Enabled</key>
-					<true />
-					<key>Path</key>
-					<string>SSDT-EHCI.aml</string>
-				</dict>
 			</array>
 			<key>Delete</key>
 			<array>
@@ -310,7 +302,7 @@
 				<key>RebuildAppleMemoryMap</key>
 				<false />
 				<key>ResizeAppleGpuBars</key>
-				<integer>-1</integer>
+				<integer>0</integer>
 				<key>SetupVirtualMap</key>
 				<false />
 				<key>SignalAppleOS</key>
@@ -332,6 +324,24 @@
 					<key>name</key>
 					<string>pci8086,2916</string>
 				</dict>
+				<key>PciRoot(0x0)/Pci(0x5,0x0,0x0)</key>
+				<dict>
+					<key>AAPL,slot-name</key>
+					<string>Internal@0,5,0/0,0/0,0/0,0</string>
+					<key>device_type</key>
+					<string>VGA compatible controller</string>
+					<key>model</key>
+					<string>Radeon RX 6600XT</string>
+				</dict>
+				<key>PciRoot(0x0)/Pci(0x5,0x0,0x1)</key>
+				<dict>
+					<key>AAPL,slot-name</key>
+					<string>Internal@0,5,0/0,0/0,0/0,1</string>
+					<key>device_type</key>
+					<string>Audio device</string>
+					<key>model</key>
+					<string>Navi 21 HDMI Audio [Radeon RX 6600 XT]</string>
+				</dict>
 			</dict>
 			<key>Delete</key>
 			<dict />
@@ -340,6 +350,42 @@
 		<dict>
 			<key>Add</key>
 			<array>
+				<dict>
+					<key>Arch</key>
+					<string>Any</string>
+					<key>BundlePath</key>
+					<string>SMCRadeonGPU.kext</string>
+					<key>Comment</key>
+					<string>V0.3.3 | SMCRadeonGPU.kext</string>
+					<key>Enabled</key>
+					<true />
+					<key>ExecutablePath</key>
+					<string>Contents/MacOS/SMCRadeonGPU</string>
+					<key>MaxKernel</key>
+					<string></string>
+					<key>MinKernel</key>
+					<string></string>
+					<key>PlistPath</key>
+					<string>Contents/Info.plist</string>
+				</dict>
+				<dict>
+					<key>Arch</key>
+					<string>Any</string>
+					<key>BundlePath</key>
+					<string>RadeonSensor.kext</string>
+					<key>Comment</key>
+					<string>V0.3.3 | RadeonSensor.kext</string>
+					<key>Enabled</key>
+					<true />
+					<key>ExecutablePath</key>
+					<string>Contents/MacOS/RadeonSensor</string>
+					<key>MaxKernel</key>
+					<string></string>
+					<key>MinKernel</key>
+					<string></string>
+					<key>PlistPath</key>
+					<string>Contents/Info.plist</string>
+				</dict>
 				<dict>
 					<key>Arch</key>
 					<string>Any</string>
@@ -409,6 +455,8 @@
 					<string></string>
 					<key>MinKernel</key>
 					<string>10.0.0</string>
+					<key>boot-args</key>
+					<string>-v agdpmod=pikera debug=0x100</string>
 					<key>PlistPath</key>
 					<string>Contents/Info.plist</string>
 				</dict>
@@ -844,21 +892,21 @@
 			<key>Debug</key>
 			<dict>
 				<key>AppleDebug</key>
-				<false />
+				<true />
 				<key>ApplePanic</key>
-				<false />
+				<true />
 				<key>DisableWatchDog</key>
-				<false />
+				<true />
 				<key>DisplayDelay</key>
 				<integer>0</integer>
 				<key>DisplayLevel</key>
-				<integer>2147483650</integer>
+				<integer>2147483714</integer>
 				<key>LogModules</key>
 				<string>*</string>
 				<key>SysReport</key>
 				<false />
 				<key>Target</key>
-				<integer>3</integer>
+				<integer>67</integer>
 			</dict>
 			<key>Entries</key>
 			<array />
@@ -991,7 +1039,7 @@
 					<key>SystemAudioVolume</key>
 					<data>Rg==</data>
 					<key>boot-args</key>
-					<string>-v agdpmod=pikera npci=0x2000 npci=0x3000 keepsyms=1
+					<string>-v agdpmod=pikera debug=0x100 npci=0x2000 npci=0x3000 keepsyms=1
 						amfi_get_out_of_my_way=1</string>
 					<key>csr-active-config</key>
 					<data>ZwAAAA==</data>
