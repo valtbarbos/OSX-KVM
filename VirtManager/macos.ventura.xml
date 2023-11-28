@@ -48,6 +48,10 @@
   <on_poweroff>destroy</on_poweroff>
   <on_reboot>restart</on_reboot>
   <on_crash>destroy</on_crash>
+  <pm>
+    <suspend-to-mem enabled="no" />
+    <suspend-to-disk enabled="no" />
+  </pm>
   <devices>
     <emulator>/usr/bin/qemu-system-x86_64</emulator>
     <disk type="file" device="disk">
@@ -125,14 +129,8 @@
       <source dev="/dev/input/by-id/usb-Logitech_USB_Receiver-if01-event-kbd" grab="all"
         grabToggle="ctrl-ctrl" repeat="on" />
     </input>
-    <input type="mouse" bus="virtio">
-      <address type="pci" domain="0x0000" bus="0x05" slot="0x00" function="0x0" />
-    </input>
-    <input type="keyboard" bus="virtio">
-      <address type="pci" domain="0x0000" bus="0x07" slot="0x00" function="0x0" />
-    </input>
-    <input type="mouse" bus="ps2" />
-    <input type="keyboard" bus="ps2" />
+    <input type='mouse' bus='virtio' />
+    <input type='keyboard' bus='virtio' />
     <audio id="1" type="none" />
     <hostdev mode="subsystem" type="pci" managed="yes">
       <source>
@@ -152,6 +150,8 @@
     </memballoon>
   </devices>
   <qemu:commandline>
+    <qemu:arg value="-global" />
+    <qemu:arg value="ICH9-LPC.acpi-pci-hotplug-with-bridge-support=off" />
     <qemu:arg value="-device" />
     <qemu:arg
       value="isa-applesmc,osk=ourhardworkbythesewordsguardedpleasedontsteal(c)AppleComputerInc" />
