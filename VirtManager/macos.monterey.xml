@@ -75,9 +75,6 @@
       <boot order="3" />
       <address type="drive" controller="0" bus="0" target="0" unit="2" />
     </disk>
-    <controller type="usb" index="0" model="qemu-xhci" ports="15">
-      <address type="pci" domain="0x0000" bus="0x00" slot="0x0d" function="0x0" />
-    </controller>
     <controller type="sata" index="0">
       <address type="pci" domain="0x0000" bus="0x00" slot="0x1f" function="0x2" />
     </controller>
@@ -116,11 +113,24 @@
       <target chassis="7" port="0xd" />
       <address type="pci" domain="0x0000" bus="0x00" slot="0x01" function="0x5" />
     </controller>
+    <controller type="pci" index="8" model="pcie-root-port">
+      <model name="pcie-root-port" />
+      <target chassis="8" port="0xe" />
+      <address type="pci" domain="0x0000" bus="0x00" slot="0x01" function="0x6" />
+    </controller>
+    <controller type="pci" index="9" model="pcie-root-port">
+      <model name="pcie-root-port" />
+      <target chassis="9" port="0xf" />
+      <address type="pci" domain="0x0000" bus="0x00" slot="0x01" function="0x7" />
+    </controller>
+    <controller type="usb" index="0" model="piix3-uhci">
+      <address type="pci" domain="0x0000" bus="0x02" slot="0x02" function="0x0" />
+    </controller>
     <interface type="network">
-      <mac address="52:54:00:26:44:6b" />
+      <mac address="52:54:00:c9:18:27" />
       <source network="default" />
-      <model type="e1000" />
-      <address type="pci" domain="0x0000" bus="0x02" slot="0x01" function="0x0" />
+      <model type="virtio" />
+      <address type="pci" domain="0x0000" bus="0x09" slot="0x00" function="0x0" />
     </interface>
     <input type="mouse" bus="virtio">
       <address type="pci" domain="0x0000" bus="0x05" slot="0x00" function="0x0" />
@@ -147,24 +157,33 @@
     <memballoon model="virtio">
       <address type="pci" domain="0x0000" bus="0x06" slot="0x00" function="0x0" />
     </memballoon>
+    <vsock model="virtio">
+      <cid auto="yes" address="3" />
+      <address type="pci" domain="0x0000" bus="0x08" slot="0x00" function="0x0" />
+    </vsock>
   </devices>
   <qemu:commandline>
+    <qemu:arg value="-usb" />
+    <qemu:arg value="-device" />
+    <qemu:arg value="usb-kbd" />
+    <qemu:arg value="-device" />
+    <qemu:arg value="usb-mouse" />
     <qemu:arg value="-object" />
     <qemu:arg
-      value="input-linux,id=input11,evdev=/dev/input/by-id/uinput-persist-keyboard0,grab_all=on,repeat=on" />
+      value="input-linux,id=kbd0,evdev=/dev/input/by-id/uinput-persist-keyboard0,grab_all=on,repeat=on" />
     <qemu:arg value="-object" />
-    <qemu:arg value="input-linux,id=input12,evdev=/dev/input/by-id/uinput-persist-mouse0" />
+    <qemu:arg value="input-linux,id=mouse0,evdev=/dev/input/by-id/uinput-persist-mouse0" />
     <qemu:arg value="-object" />
-    <qemu:arg value="input-linux,id=input13,evdev=/dev/input/by-id/uinput-persist-mouse1" />
-    <qemu:arg value="-object" />
-    <qemu:arg
-      value="input-linux,id=input14,evdev=/dev/input/by-id/usb-Logitech_USB_Receiver-event-mouse" />
+    <qemu:arg value="input-linux,id=mouse1,evdev=/dev/input/by-id/uinput-persist-mouse1" />
     <qemu:arg value="-object" />
     <qemu:arg
-      value="input-linux,id=input15,evdev=/dev/input/by-id/usb-Logitech_USB_Receiver-if01-event-kbd" />
+      value="input-linux,id=mouse2,evdev=/dev/input/by-id/usb-Logitech_USB_Receiver-event-mouse" />
     <qemu:arg value="-object" />
     <qemu:arg
-      value="input-linux,id=input16,evdev=/dev/input/by-id/usb-Logitech_USB_Receiver-if02-event-mouse" />
+      value="input-linux,id=kbd1,evdev=/dev/input/by-id/usb-Logitech_USB_Receiver-if01-event-kbd" />
+    <qemu:arg value="-object" />
+    <qemu:arg
+      value="input-linux,id=mouse3,evdev=/dev/input/by-id/usb-Logitech_USB_Receiver-if02-event-mouse" />
     <qemu:arg value="-global" />
     <qemu:arg value="ICH9-LPC.acpi-pci-hotplug-with-bridge-support=off" />
     <qemu:arg value="-device" />

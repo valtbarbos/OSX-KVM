@@ -27,7 +27,7 @@ MY_OPTIONS="+ssse3,+sse4.2,+popcnt,+avx,+aes,+xsave,+xsaveopt,check"
 # This script works for Big Sur, Catalina, Mojave, and High Sierra. Tested with
 # macOS 10.15.6, macOS 10.14.6, and macOS 10.13.6
 
-ALLOCATED_RAM="3072" # MiB
+ALLOCATED_RAM="65536" # MiB
 CPU_SOCKETS="1"
 CPU_CORES="2"
 CPU_THREADS="4"
@@ -76,8 +76,22 @@ args=(
   -netdev user,id=net0 -device vmxnet3,netdev=net0,id=net0,mac=52:54:00:c9:18:27
   -monitor stdio
   -display none
-  -object input-linux,id=kbd1,evdev=/dev/input/by-id/usb-Logitech_USB_Receiver-if01-event-kbd,grab_all=on,repeat=on
-  -object input-linux,id=mouse1,evdev=/dev/input/by-id/usb-Logitech_USB_Receiver-if02-event-mouse
+  # -usb
+  # -device usb-tablet
+  # -device usb-kbd
+  # => USB passthrough:
+  # -device usb-host,bus=usb-bus.0,vendorid=0x046d,productid=0xc343
+  # -usb -device usb-tablet,bus=usb-bus.0 -device usb-kbd,bus=usb-bus.0 
+  # => evdev and uinput
+  # -object input-linux,id=kbd0,evdev=/dev/input/by-id/uinput-persist-keyboard0,grab_all=on,repeat=on
+  # -object input-linux,id=kbd1,evdev=/dev/input/by-id/usb-Logitech_USB_Receiver-if01-event-kbd
+  # -object input-linux,id=mouse0,evdev=/dev/input/by-id/uinput-persist-mouse0
+  # -object input-linux,id=mouse1,evdev=/dev/input/by-id/uinput-persist-mouse1
+  # -object input-linux,id=mouse2,evdev=/dev/input/by-id/usb-Logitech_USB_Receiver-event-mouse
+  # -object input-linux,id=mouse3,evdev=/dev/input/by-id/usb-Logitech_USB_Receiver-if02-event-mouse
+  # => evdev
+  # -object input-linux,id=kbd1,evdev=/dev/input/by-id/usb-Logitech_USB_Receiver-if01-event-kbd,grab_all=on,repeat=on
+  # -object input-linux,id=mouse1,evdev=/dev/input/by-id/usb-Logitech_USB_Receiver-if02-event-mouse
   -vnc 0.0.0.0:1,password=on -k en-us
 )
 
