@@ -56,8 +56,8 @@ if [ "$use_gpu" -eq 1 ]; then
         -device vfio-pci,host=05:00.0,multifunction=on,x-no-kvm-intx=on
         -device vfio-pci,host=05:00.1
         -device isa-applesmc,osk="ourhardworkbythesewordsguardedpleasedontsteal(c)AppleComputerInc"
-        -drive if=pflash,format=raw,readonly=on,file="$REPO_PATH/$OVMF_DIR/OVMF_CODE.fd"
-        -drive if=pflash,format=raw,file="$REPO_PATH/$OVMF_DIR/OVMF_VARS-1024x768.fd"
+        -drive if=pflash,format=raw,readonly=on,file="$REPO_PATH/../macos-machines/ventura/OVMF_CODE.fd"
+        -drive if=pflash,format=raw,file="$REPO_PATH/../macos-machines/ventura/OVMF_VARS-GPU.fd"
         -smbios type=2
         -device ich9-intel-hda -device hda-duplex
         -device ich9-ahci,id=sata
@@ -81,7 +81,7 @@ else
         -device usb-ehci,id=ehci
         -device nec-usb-xhci,id=xhci
         -global nec-usb-xhci.msi=off
-        -device isa-applesmc,osk="ourhardworkbythesewordsguardedpleasedontsteal(c)AppleComputerInc"
+        # -device isa-applesmc,osk="ourhardworkbythesewordsguardedpleasedontsteal(c)AppleComputerInc"
         -drive if=pflash,format=raw,readonly=on,file="$REPO_PATH/../macos-machines/ventura/OVMF_CODE.fd"
         -drive if=pflash,format=raw,file="$REPO_PATH/../macos-machines/ventura/OVMF_VARS-VGA.fd"
         -smbios type=2
