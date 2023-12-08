@@ -154,7 +154,7 @@ processors work just fine.
   will need to be updated to point to the new image name.
 
   ```
-  qemu-img create -f qcow2 mac_hdd_ng.img 256G
+  qemu-img create -f qcow2 mac_hdd_ng.img 700G
   ```
 
   NOTE: Create this HDD image file on a fast SSD/NVMe disk for best results.
